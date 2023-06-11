@@ -6,9 +6,9 @@ import Link from "next/link";
 import { ExpandContext } from "contexts/expandContext";
 import { WishlistContext } from "contexts/wishlistContext";
 import Show from "shared/components/show/Show";
+import { EApiPath } from "constants/index";
 
 import s from "./Wishlist.module.scss";
-import { EApiPath } from "constants/index";
 
 const Wishlist = () => {
   const [wishist] = useContext(WishlistContext);
