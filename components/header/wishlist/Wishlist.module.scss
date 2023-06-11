@@ -1,0 +1,34 @@
+@import "styles/global";
+
+.wishlist {
+   position: relative;
+   height: toRem(46);
+   width: toRem(46);
+   border-radius: 50%;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   transition: all 0.3s ease;
+   margin-right: toRem(5);
+   & span {
+      position: absolute;
+      font-size: toRem(12);
+      right: toRem(5);
+      bottom: toRem(5);
+      display: inline-block;
+      height: toRem(18);
+      width: toRem(18);
+      text-align: center;
+      line-height: toRem(18);
+      border-radius: toRem(9);
+      margin-top: toRem(3);
+      color: $color-2;
+      background: $color-4;
+   }
+   & img {
+      height: toRem(25);
+      width: toRem(25);
+   }
+}
