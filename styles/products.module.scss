@@ -49,7 +49,18 @@
    row-gap: toRem(20);
    margin-bottom: toRem(50);
    margin-top: toRem(40);
-   align-items: flex-start;
+   @media (max-width: 768px) {
+      margin-top: toRem(20);
+   }
+}
+
+.minimumItems {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(toRem(276), toRem(400)));
+   column-gap: toRem(20);
+   row-gap: toRem(20);
+   margin-bottom: toRem(50);
+   margin-top: toRem(40);
    @media (max-width: 768px) {
       margin-top: toRem(20);
    }

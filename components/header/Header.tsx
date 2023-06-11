@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-import Cart from "components/header/cart/Cart";
-import Wishlist from "./wishlist/Wishlist";
+import CartPanel from "components/header/cartPanel/CartPanel";
+import WishlistPanel from "./wishlistPanel/WishlistPanel";
 import ExpandedMenu from "components/header/expandedMenu/ExpandedMenu";
 import { ExpandContext } from "contexts/expandContext";
 import { NAV_MENU } from "constants/index";
@@ -52,8 +52,8 @@ const Header = () => {
               ))}
             </nav>
             <div className={s.right_column}>
-              <Wishlist />
-              <Cart />
+              <WishlistPanel />
+              <CartPanel />
             </div>
           </div>
         </div>

@@ -8,10 +8,10 @@ import { CartContext } from "contexts/cartContext";
 import { getTotalNumber } from "utils/cart.utils";
 import Show from "shared/components/show/Show";
 
-import s from "./Cart.module.scss";
+import s from "./CartPanel.module.scss";
 import { EApiPath } from "constants/index";
 
-const Cart = () => {
+const CartPanel = () => {
   const [cart] = useContext(CartContext);
   const [, setExpanded] = useContext(ExpandContext);
 
@@ -33,4 +33,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartPanel;

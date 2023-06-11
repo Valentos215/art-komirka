@@ -8,9 +8,9 @@ import { WishlistContext } from "contexts/wishlistContext";
 import Show from "shared/components/show/Show";
 import { EApiPath } from "constants/index";
 
-import s from "./Wishlist.module.scss";
+import s from "./WishlistPanel.module.scss";
 
-const Wishlist = () => {
+const WishlistPanel = () => {
   const [wishist] = useContext(WishlistContext);
   const [, setExpanded] = useContext(ExpandContext);
 
@@ -30,4 +30,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default WishlistPanel;

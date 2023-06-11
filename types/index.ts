@@ -6,6 +6,7 @@ export interface IProductItem {
   cost: number;
   discount?: number;
   popularity: number;
+  isAvailable: boolean;
 }
 
 export interface ICartItem {

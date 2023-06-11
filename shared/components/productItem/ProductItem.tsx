@@ -59,12 +59,14 @@ const ProductItem = ({ product }: IProductItemProps) => {
       </div>
       <div className={s.title}>{title}</div>
       <div className={s.row}>
-        <div className={s.cost}>
-          <span className={costClassnames()}>{cost}₴</span>
-          <Show condition={!!discount}>
-            <span className={s.cost__discount}>{discount}₴</span>
-          </Show>
-        </div>
+        <Show condition={product.isAvailable}>
+          <div className={s.cost}>
+            <span className={costClassnames()}>{cost}₴</span>
+            <Show condition={!!discount}>
+              <span className={s.cost__discount}>{discount}₴</span>
+            </Show>
+          </div>
+        </Show>
         <div className={s.wishlist}>
           <Show condition={!isProductInWishlist(product, wishlist)}>
             <Image
@@ -86,18 +88,22 @@ const ProductItem = ({ product }: IProductItemProps) => {
           </Show>
         </div>
       </div>
-      <Show condition={!isProductInCart(product, cart)}>
+
+      <Show condition={!isProductInCart(product, cart) && product.isAvailable}>
         <button className={s.addToCard} onClick={addToCard}>
           Купити
         </button>
       </Show>
-      <Show condition={isProductInCart(product, cart)}>
+      <Show condition={isProductInCart(product, cart) && product.isAvailable}>
         <div className={s.goToCard}>
           <button onClick={goToCard}>Перейти до кошика</button>
           <div className={s.goToCard__image}>
             <Image src="/Cart.svg" alt="Cart logo" height={18} width={18} />
           </div>
         </div>
+      </Show>
+      <Show condition={!product.isAvailable}>
+        <div className={s.noAvailable}>Немає в наявності</div>
       </Show>
     </div>
   );

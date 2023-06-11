@@ -11,23 +11,21 @@ import { ExpandContext } from "contexts/expandContext";
 import { getFiltersList, productsToShow } from "utils/products.utils";
 import { IProductItem } from "types";
 import { NAV_MENU, PRODUCTS_SORT_CRITERIA } from "constants/index";
+import { WishlistContext } from "contexts/wishlistContext";
 
 import s from "styles/products.module.scss";
 
 type TProductsProps = { products: IProductItem[] };
 
 const Products = ({ products }: TProductsProps) => {
-  const [filter, setFilter] = useState<string[] | null>(null);
-  const [sort, setSort] = useState<number>(-1);
   const [expanded] = useContext(ExpandContext);
+  const [wishist] = useContext(WishlistContext);
 
-  const itemsList = productsToShow({ products, filter, sort });
+  const itemsList = products.filter((product) =>
+    wishist.some((item) => item.id === product.id)
+  );
 
   const scrollClassNames = expanded ? "scroll off" : "scroll";
-
-  const { asPath } = useRouter();
-
-  const filtersList = getFiltersList(products);
 
   const productItemsClassNames = () => {
     if (itemsList && itemsList?.length > 2) {
@@ -40,29 +38,11 @@ const Products = ({ products }: TProductsProps) => {
   return (
     <>
       <Head>
-        <title>{asPath.charAt(1).toUpperCase() + asPath.slice(2)}</title>
-        <meta
-          name="keywords"
-          content="полиця кутова, дизайнерська полиця, полиця для вітальні, полиця для спальні, полиці київ, елементи інтер'єру"
-        />
-        <meta
-          name="description"
-          content="Купити дизайнерські полиці за доступною ціною. Цікаві рішення для дизайну інтер'єру вашої оселі."
-        />
+        <title>Список бажань</title>
       </Head>
       <div className={scrollClassNames}>
         <div className={"container"}>
           <main className={s.wrapper}>
-            <div className={s.filters}>
-              <Show condition={!!products && !!filtersList?.length}>
-                <Filter specification={filtersList} setFilter={setFilter} />
-              </Show>
-              <div className={s.filters__space}></div>
-              <Sort sortCriteria={PRODUCTS_SORT_CRITERIA} setSort={setSort} />
-            </div>
-            <Show condition={!!filter}>
-              <div className={s.title}>{filter && filter.join(", ")}</div>
-            </Show>
             <div className={productItemsClassNames()}>
               <Show condition={!!itemsList}>
                 {!!itemsList &&
@@ -79,6 +59,8 @@ const Products = ({ products }: TProductsProps) => {
 };
 
 export default Products;
+
+type TGetServerSideProps = { params: { productsPage: string } };
 
 export async function getStaticProps() {
   //   const response = await axios.get(
