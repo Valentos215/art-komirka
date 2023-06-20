@@ -12,7 +12,7 @@ export default function App() {
 
   return (
     <h2 style={{ position: "absolute", marginTop: 120, width: "100%" }}>
-      Something went wrong
+      Помилка сервера
     </h2>
   );
 }

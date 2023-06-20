@@ -46,12 +46,12 @@
       text-align: center;
       &:hover {
          @media (min-width: 769px) {
-            font-weight: 700;
+            font-weight: 600;
          }
       }
    }
    & .active {
-      font-weight: 700;
+      font-weight: 600;
       color: #fff;
    }
 }

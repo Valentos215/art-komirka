@@ -1,7 +1,15 @@
+export enum EApiPath {
+  Shelves = "/",
+  Shelving = "/shelving",
+  Checkout = "/checkout",
+  Information = "/information",
+  Wishlist = "/wishlist",
+}
+
 export const NAV_MENU = [
-  { title: "Полиці", link: "/", logo: "/Pizza.svg" },
-  { title: "Стелажі", link: "/shelving", logo: "/Drinks.svg" },
-  { title: "Інформація", link: "/information", logo: "/Dessert.svg" },
+  { title: "Полиці", link: EApiPath.Shelves, logo: "/Pizza.svg" },
+  { title: "Стелажі", link: EApiPath.Shelving, logo: "/Drinks.svg" },
+  { title: "Інформація", link: EApiPath.Information, logo: "/Dessert.svg" },
 ];
 
 export const ERROR_MES = {
@@ -22,11 +30,3 @@ export const PRODUCTS_SORT_CRITERIA = [
   "Спочатку дешевші",
   "Спочатку дорожчі",
 ];
-
-export enum EApiPath {
-  Root = "/",
-  Shelving = "shelving",
-  Checkout = "checkout",
-  information = "information",
-  Wishlist = "wishlist",
-}

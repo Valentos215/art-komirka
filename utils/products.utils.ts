@@ -1,7 +1,7 @@
 import { IProductItem } from "types";
 
 interface IProductsToShowParams {
-  products: IProductItem[] | null;
+  productItems: IProductItem[] | null;
   filter: string[] | null;
   sort: number;
 }
@@ -9,22 +9,22 @@ interface IProductsToShowParams {
 type TProductsToShowResult = IProductItem[] | null;
 
 export const productsToShow = ({
-  products,
+  productItems,
   filter,
   sort,
 }: IProductsToShowParams): TProductsToShowResult => {
-  if (!products) {
+  if (!productItems) {
     return null;
   }
 
   let filtered: IProductItem[];
 
   if (filter?.length) {
-    filtered = products.filter((product: IProductItem) =>
+    filtered = productItems.filter((product: IProductItem) =>
       filter.every((category) => product.categories.includes(category))
     );
   } else {
-    filtered = products;
+    filtered = productItems;
   }
 
   if (sort === -1) {

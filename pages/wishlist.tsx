@@ -1,27 +1,23 @@
-import { useState, useContext } from "react";
-import { useRouter } from "next/router";
+import { useContext } from "react";
 import axios from "axios";
 import Head from "next/head";
 
-import Filter from "shared/components/filter/Filter";
-import Sort from "shared/components/sort/Sort";
 import ProductItem from "shared/components/productItem/ProductItem";
 import Show from "shared/components/show/Show";
 import { ExpandContext } from "contexts/expandContext";
-import { getFiltersList, productsToShow } from "utils/products.utils";
 import { IProductItem } from "types";
 import { NAV_MENU, PRODUCTS_SORT_CRITERIA } from "constants/index";
 import { WishlistContext } from "contexts/wishlistContext";
 
 import s from "styles/products.module.scss";
 
-type TProductsProps = { products: IProductItem[] };
+type TProductsProps = { productItems: IProductItem[] };
 
-const Products = ({ products }: TProductsProps) => {
+const Products = ({ productItems }: TProductsProps) => {
   const [expanded] = useContext(ExpandContext);
   const [wishist] = useContext(WishlistContext);
 
-  const itemsList = products.filter((product) =>
+  const itemsList = productItems.filter((product) =>
     wishist.some((item) => item.id === product.id)
   );
 
@@ -43,8 +39,14 @@ const Products = ({ products }: TProductsProps) => {
       <div className={scrollClassNames}>
         <div className={"container"}>
           <main className={s.wrapper}>
+            <Show condition={!!itemsList.length}>
+              <h2 className={s.title}>Список бажань</h2>
+            </Show>
+            <Show condition={!itemsList.length}>
+              <h2 className={s.title}>Список бажань пустий</h2>
+            </Show>
             <div className={productItemsClassNames()}>
-              <Show condition={!!itemsList}>
+              <Show condition={!!itemsList.length}>
                 {!!itemsList &&
                   itemsList.map((product: IProductItem) => (
                     <ProductItem key={product.id} product={product} />
@@ -68,7 +70,7 @@ export async function getStaticProps() {
   //   );
   //   const products = response.data;
 
-  const products = [
+  const productItems = [
     {
       id: "gbdfg5bfd5gb5gb",
       title: "Кутова полиця Double Cube",
@@ -118,11 +120,11 @@ export async function getStaticProps() {
     },
   ];
 
-  if (!products) {
+  if (!productItems) {
     return { notFound: true };
   }
 
   return {
-    props: { products },
+    props: { productItems },
   };
 }
