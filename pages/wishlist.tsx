@@ -9,7 +9,7 @@ import { IProductItem } from "types";
 import { NAV_MENU, PRODUCTS_SORT_CRITERIA } from "constants/index";
 import { WishlistContext } from "contexts/wishlistContext";
 
-import s from "styles/products.module.scss";
+import s from "components/products/products.module.scss";
 
 type TProductsProps = { productItems: IProductItem[] };
 
